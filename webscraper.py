@@ -1,6 +1,7 @@
 import requests
 import urllib.request
 import time
+import re
 from bs4 import BeautifulSoup
 
 def download_subject_list():
@@ -48,7 +49,8 @@ class Session:
     instructor = ""
 
 def download_subject_data(subject_page):
-    soup = BeautifulSoup(subject_page, 'html.parser')
+    cleaned_page = subject_page.replace('\n', '').replace('\t', '')
+    soup = BeautifulSoup(cleaned_page, 'html.parser')
     current_object = soup.find("h4")
     current_session = Session
 
@@ -63,7 +65,21 @@ def download_subject_data(subject_page):
         session_data = current_object.children
         # Now, parse the tbody
             # Then, parse each row in the tbody
-        print([i for i in session_data])
+
+        for row in session_data:
+            if row == ' ' or re.match(r'(<thead>)[.\n]*', str(row)):
+                continue
+            dirty_session = row.contents[1].contents
+            session = [i for i in dirty_session if (i != ' ')]
+            current_session.section = session[0].text
+            current_session.component = session[1].text
+            current_session.class_nbr = session[2].text
+            current_session.days = session[3].contents
+            current_session.start_time = session[4].text
+            current_session.end_time = session[5].text
+            current_session.location = session[6].text
+            current_session.instructor = session[7].text.strip('\r ')
+
         current_object = current_object.find_next("h4")
 
 download_subject_list()
