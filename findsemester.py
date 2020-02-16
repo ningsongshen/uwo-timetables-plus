@@ -1,9 +1,5 @@
 import csv, re
-# import re
-# import pandas as pd
-# csv_input = pd.read_csv('data/all.csv')
-# csv_input['suffix'] = csv_input[0].
-# csv_input.to_csv('data/all1.csv')
+
 with open('data/all.csv', newline='') as csvfile:
     freader = csv.reader(csvfile, delimiter=',', quotechar='"')
     with open('data/allsem.csv', 'w', newline='') as outfile:
