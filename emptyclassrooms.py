@@ -6,7 +6,7 @@ classrooms = set()
 # available half-hour timeslots between 7:00 and 24:00
 times = [x/2 for x in range(14, 48)]
 
-# dictioanry that holds all the info on when classes are used
+# dictionary that holds all the info on when classes are used
 usage = {}
 for d in ["Mo", "Tu", "We", "Th", "Fr"]:
     usage[d] = {x: set() for x in times}
@@ -84,7 +84,7 @@ with open('data/allsem.csv', 'r', newline='') as csvfile:
 # which are empty for the entire duration
 day = input("Enter a day: ")
 hope_start = float(input("Enter a start time: "))
-hope_finish = float(input("Enger an ending time: "))
+hope_finish = float(input("Enter an ending time: "))
 
 empty = classrooms
 end = False
@@ -98,7 +98,7 @@ while not end:
         end = True
     
 # find the difference between the available classrooms and the used classrooms, which should be the available classrooms!
-print(classrooms.difference(filled))
+print(sorted(list(classrooms.difference(filled))))
 
 
 # Old Steps:
