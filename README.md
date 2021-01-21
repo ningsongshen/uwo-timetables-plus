@@ -1,20 +1,19 @@
 # uwo-timetables-plus
 
-An improvement over the existing timetable interface with more data and visualization options.
+Find empty classrooms to study in...as a group or by yourself--with no sound restrictions.
 
-## Inspirations
+## Background
 
-Data scraper source: <https://github.com/shrumit/timetable-scraper-java>
+There are many existing tools out there that solve certain timetable problems:
+- Parse the timetables website (old): <https://github.com/shrumit/timetable-scraper-java>
+- Generate optimal timetables: <https://github.com/shrumit/Western-Timetable-Maker>
+- Many default tools available from the university itself.
 
-Sample timetable generator: <https://github.com/shrumit/Western-Timetable-Maker>
-
-Both are great, but miss some features that I want.
-
-My preferred functionality: find when and where the empty classrooms are, optimal class timings, prof info...
+All are great, but miss some features that I want. My preferred functionality in this use case is to find when my favourite classrooms are empty, or which classrooms are free at a given time.
 
 ## Updating the raw data
 
-1. webscraper (be careful for the request limit/bot blocking)
+1. scraper (be careful for the request limit/bot blocking)
 2. merge csv files into one file
 3. findsemester
 4. emptyclassrooms
@@ -28,6 +27,7 @@ pipenv shell
 python emptyclassrooms.py
 ```
 
+Necessary abbreviations when searching:
 - Days of the week: first two letters only.
 - Start time: 24 hours clock, use .5 for the half hour. Ex: 3:30 is 15.5
 - End time: same format, do not enter the same time
@@ -37,6 +37,7 @@ python emptyclassrooms.py
 python favclassrooms.py
 ```
 
+Necessary abbreviations when searching:
 - Enter a classroom code: building-number. Ex: WSC-240, UC-9999
 - Prints out a chart of when it is being used
 - Displays utilization rate

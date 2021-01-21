@@ -1,11 +1,24 @@
 import requests
-import urllib.request
 import time
 import re
 import csv
-import os
 import random
 from bs4 import BeautifulSoup
+
+class Session:
+    course_name = ""
+    course_desc = ""
+    section = 1
+    component = "LEC"
+    class_nbr = 0
+    days = "MWF"
+    start_time = "8:30"
+    end_time = "9:30"
+    location = ""
+    instructor = ""
+
+    def session_list(self):
+        return [self.course_name, self.course_desc, self.section, self.component, self.class_nbr, self.days, self.start_time, self.end_time, self.location, self.instructor]
 
 def download_subject_list():
     subjects = []
@@ -47,21 +60,6 @@ def clean_subject_page(page):
     page = page.replace("\n", "").replace("\r", "").replace("\t", "")
     page = page[page.find("<h4>"):]
     soup = BeautifulSoup(page, 'html.parser')
-
-class Session:
-    course_name = ""
-    course_desc = ""
-    section = 1
-    component = "LEC"
-    class_nbr = 0
-    days = "MWF"
-    start_time = "8:30"
-    end_time = "9:30"
-    location = ""
-    instructor = ""
-
-    def session_list(self):
-        return [self.course_name, self.course_desc, self.section, self.component, self.class_nbr, self.days, self.start_time, self.end_time, self.location, self.instructor]
 
 def convert_to_weeks(week_table):
     soup = BeautifulSoup(week_table, 'html.parser')
